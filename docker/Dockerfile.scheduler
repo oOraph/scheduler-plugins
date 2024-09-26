@@ -1,0 +1,13 @@
+FROM golang:bookworm AS builder
+
+COPY . /opt/src
+
+WORKDIR /opt/src
+
+RUN make build-scheduler
+
+FROM golang:bookworm
+
+COPY --from=builder /opt/src/bin/kube-scheduler /bin
+
+ENTRYPOINT ["/bin/kube-scheduler"]

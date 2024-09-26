@@ -1,0 +1,13 @@
+FROM golang:bookworm AS builder
+
+COPY . /opt/src
+
+WORKDIR /opt/src
+
+RUN make build-controller
+
+FROM golang:bookworm
+
+COPY --from=builder /opt/src/bin/controller /bin
+
+ENTRYPOINT ["/bin/controller"]

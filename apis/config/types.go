@@ -279,3 +279,16 @@ type SySchedArgs struct {
 	// CR name of the default profile for all system calls
 	DefaultProfileName string
 }
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// NodePressureArgs holds arguments used to configure NodePressure plugin.
+type NodePressureArgs struct {
+	metav1.TypeMeta
+	// Min possible pressure value
+	MinPressure int64
+	// Max possible pressure value
+	MaxPressure int64
+	// Node label for the pressure value
+	NodeLabel string
+}

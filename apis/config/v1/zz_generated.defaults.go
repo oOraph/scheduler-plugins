@@ -35,6 +35,7 @@ func RegisterDefaults(scheme *runtime.Scheme) error {
 	})
 	scheme.AddTypeDefaultingFunc(&LowRiskOverCommitmentArgs{}, func(obj interface{}) { SetObjectDefaults_LowRiskOverCommitmentArgs(obj.(*LowRiskOverCommitmentArgs)) })
 	scheme.AddTypeDefaultingFunc(&NetworkOverheadArgs{}, func(obj interface{}) { SetObjectDefaults_NetworkOverheadArgs(obj.(*NetworkOverheadArgs)) })
+	scheme.AddTypeDefaultingFunc(&NodePressureArgs{}, func(obj interface{}) { SetObjectDefaults_NodePressureArgs(obj.(*NodePressureArgs)) })
 	scheme.AddTypeDefaultingFunc(&NodeResourceTopologyMatchArgs{}, func(obj interface{}) {
 		SetObjectDefaults_NodeResourceTopologyMatchArgs(obj.(*NodeResourceTopologyMatchArgs))
 	})
@@ -62,6 +63,10 @@ func SetObjectDefaults_LowRiskOverCommitmentArgs(in *LowRiskOverCommitmentArgs) 
 
 func SetObjectDefaults_NetworkOverheadArgs(in *NetworkOverheadArgs) {
 	SetDefaults_NetworkOverheadArgs(in)
+}
+
+func SetObjectDefaults_NodePressureArgs(in *NodePressureArgs) {
+	SetDefaults_NodePressureArgs(in)
 }
 
 func SetObjectDefaults_NodeResourceTopologyMatchArgs(in *NodeResourceTopologyMatchArgs) {

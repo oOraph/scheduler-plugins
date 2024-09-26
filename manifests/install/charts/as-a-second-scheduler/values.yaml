@@ -3,8 +3,9 @@
 # Declare variables to be passed into your templates.
 
 scheduler:
-  name: scheduler-plugins-scheduler
-  image: registry.k8s.io/scheduler-plugins/kube-scheduler:v0.29.7
+  name: node-pressure-scheduler
+  # image: registry.k8s.io/scheduler-plugins/kube-scheduler:v0.29.7
+  image: raphael31415/scheduler:5.0
   replicaCount: 1
   leaderElect: false
   nodeSelector: {}
@@ -23,8 +24,8 @@ controller:
 # as they need extra RBAC privileges on metrics.k8s.io.
 
 plugins:
-  enabled: ["Coscheduling","CapacityScheduling","NodeResourceTopologyMatch","NodeResourcesAllocatable"]
-  disabled: ["PrioritySort"] # only in-tree plugins need to be defined here
+  enabled: [ "Coscheduling", "NodePressure"]
+  disabled: ["Coscheduling","CapacityScheduling","NodeResourceTopologyMatch","NodeResourcesAllocatable", "PrioritySort"] # only in-tree plugins need to be defined here
 
 # Customize the enabled plugins' config.
 # Refer to the "pluginConfig" section of manifests/<plugin>/scheduler-config.yaml.
@@ -33,6 +34,10 @@ pluginConfig:
 - name: Coscheduling
   args:
     permitWaitingTimeSeconds: 10 # default is 60
+- name: NodePressure
+  args:
+    maxPressure: 42
+    nodeLabel: hello-pressure
 # Or, customize the other plugins
 # - name: NodeResourceTopologyMatch
 #   args:

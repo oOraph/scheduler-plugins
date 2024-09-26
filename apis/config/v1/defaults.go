@@ -250,3 +250,21 @@ func SetDefaults_SySchedArgs(obj *SySchedArgs) {
 		obj.DefaultProfileName = &DefaultSySchedProfileName
 	}
 }
+
+// SetDefaultNodePressureArgs sets the default parameters for the NodePressure plugin
+func SetDefaults_NodePressureArgs(args *NodePressureArgs) {
+	if args.MaxPressure == nil {
+		defaultMax := int64(40)
+		args.MaxPressure = &defaultMax
+	}
+
+	if args.MinPressure == nil {
+		defaultMin := int64(0)
+		args.MinPressure = &defaultMin
+	}
+
+	if args.NodeLabel == nil {
+		defaultLabel := "huggingface.co/node-pressure"
+		args.NodeLabel = &defaultLabel
+	}
+}

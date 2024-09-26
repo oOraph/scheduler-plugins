@@ -277,3 +277,18 @@ type SySchedArgs struct {
 	// CR name of the default profile for all system calls
 	DefaultProfileName *string `json:"defaultProfileName,omitempty"`
 }
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+// +k8s:defaulter-gen=true
+
+// NodePressureArgs holds arguments used to configure NodePressure plugin.
+type NodePressureArgs struct {
+	metav1.TypeMeta `json:",inline"`
+
+	// Min possible pressure value
+	MinPressure *int64 `json:"minPressure,omitempty"`
+	// Max possible pressure value
+	MaxPressure *int64 `json:"maxPressure,omitempty"`
+	// Node label for the pressure value
+	NodeLabel *string `json:"nodeLabel,omitempty"`
+}
